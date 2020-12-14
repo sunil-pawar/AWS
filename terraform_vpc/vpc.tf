@@ -56,14 +56,39 @@ resource "aws_subnet" "test_public_sn_01" {
   }
 }
 
-#  Private subnet 
+# Public subnet 2
+resource "aws_subnet" "test_public_sn_02" {
+  vpc_id = aws_vpc.test_vpc.id
+  cidr_block = var.test_public_03_cidr
+  availability_zone = data.aws_availability_zones.available.names[1]
+   map_public_ip_on_launch = true
+  tags = {
+    Name = "test_public_sn_02"
+    stage = var.stage
+    billing_tag = var.billing_tag
+  }
+}
+#  Private subnet 1
 resource "aws_subnet" "test_private_sn_01" {
   vpc_id                  = aws_vpc.test_vpc.id
   cidr_block              = var.test_private_02_cidr
-availability_zone = data.aws_availability_zones.available.names[1]
+availability_zone = data.aws_availability_zones.available.names[0]
   map_public_ip_on_launch = false
   tags = {
     Name = "test_private_sn_01"
+    stage = var.stage
+    billing_tag = var.billing_tag
+  }
+}
+
+#  Private subnet 2 
+resource "aws_subnet" "test_private_sn_02" {
+  vpc_id                  = aws_vpc.test_vpc.id
+  cidr_block              = var.test_private_04_cidr
+availability_zone = data.aws_availability_zones.available.names[1]
+  map_public_ip_on_launch = false
+  tags = {
+    Name = "test_private_sn_02"
     stage = var.stage
     billing_tag = var.billing_tag
   }
@@ -85,7 +110,13 @@ resource "aws_route" "private_nat_gateway" {
 }
 #associate rout tabel to private subnet
 resource "aws_route_table_association" "private" {
-  subnet_id      = aws_subnet.test_private_sn_01.id
+  subnet_id      =  aws_subnet.test_private_sn_01.id
+  route_table_id = aws_route_table.private.id
+}
+
+#associate rout tabel to private subnet2
+resource "aws_route_table_association" "private2" {
+  subnet_id      =   aws_subnet.test_private_sn_02.id
   route_table_id = aws_route_table.private.id
 }
 
@@ -108,6 +139,11 @@ resource "aws_route_table" "test_public_sn_rt_01" {
 # Associate the routing table to public subnet 1
 resource "aws_route_table_association" "test_public_sn_rt_01_assn" {
   subnet_id = aws_subnet.test_public_sn_01.id
+  route_table_id = aws_route_table.test_public_sn_rt_01.id
+}
+
+resource "aws_route_table_association" "test_public_sn_rt_02_assn" {
+  subnet_id = aws_subnet.test_public_sn_02.id
   route_table_id = aws_route_table.test_public_sn_rt_01.id
 }
 

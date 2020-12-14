@@ -38,8 +38,17 @@ variable "test_public_01_cidr" {
   default = "10.0.1.0/24"
 }
 
-variable "test_private_02_cidr" {
+variable "test_public_03_cidr" {
   description = "Public 0.0 CIDR for externally accessible subnet"
+  default = "10.0.3.0/24"
+}
+variable "test_private_04_cidr" {
+  description = "private  0.0 CIDR for inetrnally accessible subnet"
+  default = "10.0.4.0/24"
+}
+
+variable "test_private_02_cidr" {
+  description = "Private  0.0 CIDR for internally accessible subnet"
   default = "10.0.2.0/24" 
   }
 
@@ -51,5 +60,28 @@ variable "stage" { default = "production" }
 variable "cluster_name" { default = "techtest" } 
  
 
+########################################## images map ######################
+variable "instance_map"  { 
+  type = map
+   default = { 
+    "t2.micro" = "1" ,
+    "t2.micro" = "2"
+      } 
+} 
+######################################### capacity autoscaling###################3
 
+variable "maximsize" {
+  default=2
+}
+variable "minimsize" {
+  default=1
+}
+variable "desire"{
+  default=1
+}
 
+########################################Cluster variable ###########################
+
+variable "ecs_cluster_name" {
+  default = "test_ecs_cluster"
+}
