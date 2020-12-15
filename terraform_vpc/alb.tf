@@ -2,7 +2,7 @@ resource "aws_alb" "ecs-load-balancer" {
     name                = "ecs-load-balancer"
     security_groups     = [aws_security_group.test_public_sg.id]
     subnets             = [aws_subnet.test_public_sn_01.id, aws_subnet.test_public_sn_02.id]
-
+    enable_http2 = false
     tags = {
       Name = "ecs-load-balancer"
       stage = var.stage

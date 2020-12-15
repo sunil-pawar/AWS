@@ -71,13 +71,13 @@ variable "instance_map"  {
 ######################################### capacity autoscaling###################3
 
 variable "maximsize" {
-  default=2
+  default=3
 }
 variable "minimsize" {
-  default=1
+  default=2
 }
 variable "desire"{
-  default=1
+  default=2
 }
 
 ########################################Cluster variable ###########################
