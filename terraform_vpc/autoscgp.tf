@@ -44,8 +44,9 @@ resource "aws_launch_template" "test_launch_template" {
 
 resource "aws_autoscaling_group" "test_autoscaling_group" {
   vpc_zone_identifier = [
-    aws_subnet.test_public_sn_01.id,
-    aws_subnet.test_public_sn_02.id
+    #changed the sunets to private to test the autoscaling in private sbnet
+    aws_subnet.test_private_sn_01.id,
+    aws_subnet.test_private_sn_02.id
      ]
 
   name = "test_autoscaling_group"

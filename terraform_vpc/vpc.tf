@@ -35,7 +35,8 @@ resource "aws_eip" "nat_eip" {
 # NAT 
 resource "aws_nat_gateway" "nat" {
   allocation_id = aws_eip.nat_eip.id
-  subnet_id     = aws_subnet.test_private_sn_01.id
+  #chaning to public subnet
+  subnet_id     = aws_subnet.test_public_sn_01.id
   depends_on    = [aws_internet_gateway.test_ig]
   tags = {
     Name        = "nat"
