@@ -42,7 +42,15 @@ resource "aws_alb_listener" "alb-listener" {
     default_action {
         target_group_arn = aws_alb_target_group.ecs-target-group.arn
         type             = "forward"
+        /* type = "redirect"
+
+        redirect {
+            port        = "443"
+            protocol    = "HTTPS"
+            status_code = "HTTP_301"   
+        } */
     }
+
      
     
 

@@ -85,3 +85,21 @@ variable "desire"{
 variable "ecs_cluster_name" {
   default = "test_ecs_cluster"
 }
+########################################### rds
+
+variable "rds_db_name" {
+  description = "RDS database name"
+  default     = "mydb"
+}
+variable "rds_username" {
+  description = "RDS database username"
+  default     = "postgre"
+}
+variable "rds_password" {
+  description = "RDS database password"
+  default = "postgredb"
+}
+variable "rds_instance_class" {
+  description = "RDS instance type"
+  default     = "db.t2.micro"
+}
